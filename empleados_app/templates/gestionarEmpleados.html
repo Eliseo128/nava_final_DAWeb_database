@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+{% load static %}
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> registrar</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarEmpleados/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtempleado" name="txtempleado" class="form-control" placeholder="id_empleado" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="nombre" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtedad" name="txtedad" class="form-control" placeholder="edad" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcurp" name="txtcurp" class="form-control" placeholder="curp" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtelefono" name="txtelefono" class="form-control" placeholder="telefono" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="datetime" id="txthorario" name="txthorario" class="form-control" placeholder="horario" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtpaga" name="txtpaga" class="form-control" placeholder="paga" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de Empleados  </h1>
+    <img class="w-50" src="{% static 'img/emp1.jpg' %}" alt="" width="200" height="150" />
+    <br><br>
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id empleados</th>
+          <th scope="col">nombre</th>
+          <th scope="col">edad</th>
+          <th scope="col">curp</th>
+          <th scope="col">telefono</th>
+          <th scope="col">horario</th>
+          <th scope="col">paga</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in listaEmpleados  %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{p.id_empleados}}</td>
+          <td>{{p.nombre}}</td>
+          <td>{{p.edad}}</td>
+          <td>{{p.curp}}</td>
+          <td>{{p.telefono}}</td>
+          <td>{{p.horario}}</td>
+          <td>{{p.paga}}</td>
+          <th><a href="seleccionarEmpleado/{{p.id_empleados}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarEmpleado/{{p.id_empleados}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}

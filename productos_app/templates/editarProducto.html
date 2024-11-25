@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4 ">
+        <h2>Editar Materia</h2>
+        <!-- Aqui codigo tarjeta -->
+
+    <div class="card"> <!-- la tarjeta -->
+        <div class="card-body">
+            <form action="/editarProducto/" method="POST"> {% csrf_token %}<!-- falta action -->
+                <div class="form-group">
+                    <input type="text" id="txtproducto" name="txtproducto" class="form-control" minlength="1" maxlength="6" value="{{p.id_producto}}" readonly required>
+                  </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtprecio" name="txtprecio" class="form-control" maxlength="100" value="{{p.precio}}" required>
+                </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtmarca" name="txtmarca" class="form-control"  maxlength="100" value="{{p.marca}}" required>
+                </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtnombre" name="txtnombre" class="form-control"  maxlength="100" value="{{p.nombre}}" required>
+                </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtcategoria" name="txtcategoria" class="form-control"  maxlength="100" value="{{p.categoria}}" required>
+                </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtdiseño" name="txtdiseño" class="form-control" maxlength="100" value="{{p.diseño}}" required>
+                </div>
+                <div class="form-group py-3">
+                <input type="text" id="txtcalidad" name="txtcalidad" class="form-control" maxlength="100" value="{{p.calidad}}" required>
+                </div>
+            <div class="form-group py-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            </form>
+        </div>
+        </div> <!-- la tarjeta -->
+
+        <!-- Aqui codigo tarjeta -->
+        
+    </div>
+</div><!-- fila en editar  -->
+
+{% endblock cuerpo %}

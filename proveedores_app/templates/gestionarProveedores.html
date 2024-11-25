@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> proveedores</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarProveedores/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtproveedor" name="txtproveedor" class="form-control" placeholder="id_proveedor" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="nombre" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtedad" name="txtedad" class="form-control" placeholder="edad" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txttipo_proveedor" name="txttipo_proveedor" class="form-control" placeholder="tipo proveedor" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txthorario" name="txthorario" class="form-control" placeholder="horario" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="telefono" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="direccion" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de proveedores</h1>
+
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id Proveedor</th>
+          <th scope="col">nombre</th>
+          <th scope="col">edad</th>
+          <th scope="col">tipo Producto</th>
+          <th scope="col">horario</th>
+          <th scope="col">telefono</th>
+          <th scope="col">direccion</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in listaProveedores %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{c.id_proveedor}}</td>
+          <td>{{c.nombre}}</td>
+          <td>{{c.edad}}</td>
+          <td>{{c.tipo_producto}}</td>
+          <td>{{c.horario}}</td>
+          <td>{{c.telefono}}</td>
+          <td>{{c.direccion}}</td>
+          <th><a href="seleccionarProveedor/{{c.id_proveedor}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarProveedor/{{c.id_proveedor}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> cliente</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarCliente/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtcliente" name="txtcliente" class="form-control" placeholder="id_cliente" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="nombre" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtpago_total" name="txtpago_total" class="form-control" placeholder="pago total" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="telefono" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txthora_compra" name="txthora_compra" class="form-control" placeholder="hora de compra" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcantidad_producto" name="txtcantidad_producto" class="form-control" placeholder="cantidad de producots" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="date" id="txtdia_compra" name="txtdia_compra" class="form-control" placeholder="dia de compra" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de clientes</h1>
+
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id cliente</th>
+          <th scope="col">nombre</th>
+          <th scope="col">pago total</th>
+          <th scope="col">telefono</th>
+          <th scope="col">hora de compra</th>
+          <th scope="col">dia</th>
+          <th scope="col">dia de compra</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in listaClientes %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{c.id_cliente}}</td>
+          <td>{{c.nombre}}</td>
+          <td>{{c.pago_total}}</td>
+          <td>{{c.telefono}}</td>
+          <td>{{c.hora_compra}}</td>
+          <td>{{c.dia}}</td>
+          <td>{{c.dia_compra}}</td>
+          <th><a href="seleccionarCliente/{{c.id_cliente}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarCliente/{{c.id_cliente}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}

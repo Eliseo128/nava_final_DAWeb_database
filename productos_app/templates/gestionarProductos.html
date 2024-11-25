@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> productos</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarProducto/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtproducto" name="txtproducto" class="form-control" placeholder="id_producto" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtprecio" name="txtprecio" class="form-control" placeholder="precio" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="marca" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="nombre" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcategoria" name="txtcategoria" class="form-control" placeholder="categoria" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtdiseño" name="txtdiseño" class="form-control" placeholder="diseño" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcalidad" name="txtcalidad" class="form-control" placeholder="calidad" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de Productos</h1>
+
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id Producto</th>
+          <th scope="col">precio</th>
+          <th scope="col">marca</th>
+          <th scope="col">nombre</th>
+          <th scope="col">categoria</th>
+          <th scope="col">diseño</th>
+          <th scope="col">calidad</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in listaProductos  %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{p.id_producto}}</td>
+          <td>{{p.precio}}</td>
+          <td>{{p.marca}}</td>
+          <td>{{p.nombre}}</td>
+          <td>{{p.categoria}}</td>
+          <td>{{p.diseño}}</td>
+          <td>{{p.calidad}}</td>
+          <th><a href="seleccionarProducto/{{p.id_producto}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarProducto/{{p.id_producto}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}

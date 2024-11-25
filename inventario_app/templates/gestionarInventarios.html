@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+  {% load static %}
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> registrar</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarInventario/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtinventario" name="txtinventario" class="form-control" placeholder="id_inventario" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="date" id="txtentrada" name="txtentrada" class="form-control" placeholder="fecha de entrada" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtestado" name="txtestado" class="form-control" placeholder="estado de los productos" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="codigo de barras" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcantidad" name="txtcantidad" class="form-control" placeholder="cantidad de stock" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtdescripcion" name="txtdescripcion" class="form-control" placeholder="descripcion" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtprecio_unitario" name="txtprecio_unitario" class="form-control" placeholder="precio unitario" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de inventario</h1>
+    <img class="w-50" src="{% static 'img/inventario1.jpg' %}" alt="" width="100" height="200" />
+    <br>
+    <br>
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id inventario</th>
+          <th scope="col">fecha de entrada</th>
+          <th scope="col">estado del producto</th>
+          <th scope="col">codigo de barras</th>
+          <th scope="col">cantidad stock</th>
+          <th scope="col">descripcion</th>
+          <th scope="col">precio unitario</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in listaInventarios  %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{p.id_inventario}}</td>
+          <td>{{p.fecha_entrada | date:'d-m_y'}}</td>
+          <td>{{p.estado_producto}}</td>
+          <td>{{p.codigo_barras}}</td>
+          <td>{{p.cantidad_stock}}</td>
+          <td>{{p.descripcion}}</td>
+          <td>{{p.precio_unitario}}</td>
+          <th><a href="seleccionarInventario/{{p.id_inventario}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarInventario/{{p.id_inventario}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}

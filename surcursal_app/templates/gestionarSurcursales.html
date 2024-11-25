@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"><!-- la fila -->
+  <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!-- la columna izquierda -->
+
+    <h1> registrar</h1>
+
+    <div class="card"> <!-- la tarjeta -->
+      <div class="card-body">
+        <form action="registrarSurcursales/" method="POST"> {% csrf_token %}<!-- falta action -->
+          <div class="form-group">
+            <input type="text" id="txtsurcursal" name="txtsurcursal" class="form-control" placeholder="id_surcursal" minlength="1" maxlength="6" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtubicacion" name="txtubicacion" class="form-control" placeholder="ubicacion" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txttamaño" name="txttamaño" class="form-control" placeholder="tamaño" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcapacidad" name="txtcapacidad" class="form-control" placeholder="capacidad" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtgerente" name="txtgerente" class="form-control" placeholder="gerente" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txthorario" name="txthorario" class="form-control" placeholder="horario" maxlength="100" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="telefono" maxlength="100" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div> <!-- la tarjeta -->
+
+  </div><!-- la columna izquierda -->
+
+  <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"><!-- la columna derecha -->
+
+    <h1> Listado de sucursales</h1>
+
+    <!-- la tabla -->
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id sucursal</th>
+          <th scope="col">ubicacion</th>
+          <th scope="col">tamaño</th>
+          <th scope="col">capacidad</th>
+          <th scope="col">gerente</th>
+          <th scope="col">horario</th>
+          <th scope="col">telefono</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in listaSurcursales %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{c.id_surcursal}}</td>
+          <td>{{c.ubicacion}}</td>
+          <td>{{c.tamaño}}</td>
+          <td>{{c.capacidad}}</td>
+          <td>{{c.gerente}}</td>
+          <td>{{c.horario}}</td>
+          <td>{{c.telefono}}</td>
+          <th><a href="seleccionarSurcursal/{{c.id_surcursal}}" class="btn btn-info ">editar</a></th><!-- falta -->
+          <th><a href="borrarSurcursal/{{c.id_surcursal}}" class="btn btn-danger">borrar</a></th><!-- falta -->
+      </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+    <!-- la tabla -->
+
+  </div><!-- la columna derecha -->
+
+</div><!-- la fila -->
+
+{% endblock %}
